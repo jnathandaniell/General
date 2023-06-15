@@ -1,8 +1,4 @@
-Develops Models
-Plays Games
-Writes Code
-Enjoys Cheese
-Is Properly Lubricated
+Nuclear Engineering PhD candidate, intelligent systems focus
 
 <!---
 SecretSoupCultist/SecretSoupCultist is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

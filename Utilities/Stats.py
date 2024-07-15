@@ -15,6 +15,7 @@ __status__ = "Development"
 
 
 
+# SimpleStats class for single population basic statistics.
 class SimpleStats():
     """Class for producing simple summary statistics.
 

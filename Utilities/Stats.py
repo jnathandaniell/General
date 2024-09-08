@@ -14,6 +14,10 @@ __email__ = "jnathandaniell@gmail.com"
 __status__ = "Development"
 
 
+def get_perumutations(n, r):
+    """"""
+    from math import factorial
+    return round(factorial(n) / factorial(n-r))
 
 # SimpleStats class for single population basic statistics.
 class SimpleStats():
@@ -23,6 +27,7 @@ class SimpleStats():
     'calc_basic_stats' function. Statistical information may be retrieved
     after this function is called.
     """
+
     def __init__(self, X=[]):
         """Takes a dataset and calculates standard statistical mesaures."""
         self.X = X
@@ -125,3 +130,4 @@ class SimpleStats():
                 if i != self.N:
                     return (i + 0.5) / self.N * 100.
         return 100.
+

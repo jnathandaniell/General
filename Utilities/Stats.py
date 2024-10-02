@@ -14,10 +14,23 @@ __email__ = "jnathandaniell@gmail.com"
 __status__ = "Development"
 
 
+from math import factorial
+
+
 def get_perumutations(n, r):
-    """"""
-    from math import factorial
+    """Gets the permutations of n given r."""
     return round(factorial(n) / factorial(n-r))
+
+
+class DiscreteDist():
+    """Class for discrete distirbutions."""
+    pass
+
+
+class ContinuousDist():
+    """Class for continuous distributions."""
+    pass
+
 
 # SimpleStats class for single population basic statistics.
 class SimpleStats():

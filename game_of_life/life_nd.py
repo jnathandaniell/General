@@ -26,10 +26,12 @@ class LifeND():
     shape = tuple(3 for _ in range(dims))
     space = np.ones(shape=shape)
 
-    def __init__(self, *, space=space) -> None:
+    def __init__(self, *, space=space, wrap=False, track=True) -> None:
+        # Generate initial space, dimensions, and rules.
         self.space = space
-        self.hist = [self.space]
         self.dims = np.shape(space)
+        self.make_rules()
+        self.wrap = wrap
         # Make an index space (NOT CORRECT CURRENTLY).
         self.ind_list = [tuple(a, b, c, ... n)
                          for a in range(self.dims[0])
@@ -37,9 +39,10 @@ class LifeND():
                          for c in range(self.dims[2])
                          ...
                          for n in range(self.dims[-1])]
-        self.make_rules()
-        self.track = True
-        self.wrap = False
+        # History tracking (as runtape).
+        self.track = track
+        if self.track:
+            self.tape = [self.space]
 
     #######################################
     ##### Index validity and wrapping #####
@@ -162,7 +165,7 @@ class LifeND():
     ###########################
     def check_for_similarity(self, new_space) -> bool:
         """Checks to see if the space has already existed."""
-        if any(self.hist) == new_space:
+        if any(self.tape) == new_space:
             return True
         return False
     
@@ -200,13 +203,13 @@ class LifeND():
             return True, (self.space, None)
         # Check if the space has already existed.
         if self.check_for_similarity(new_space):
-            a = self.hist.index(new_space)
+            a = self.tape.index(new_space)
             # Return the repeating shape as well as its period.
-            return True, (new_space, len(self.hist) - a)
+            return True, (new_space, len(self.tape) - a)
         # Update space.
         self.space = new_space
         if self.track:
-            self.hist.append(self.space)
+            self.tape.append(self.space)
         return False, (self.space, None)
     
     def stable_search(self, t_max):

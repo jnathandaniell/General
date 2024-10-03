@@ -19,9 +19,9 @@ import numpy as np
 class LifeND():
     """Class for the n-dimensional Conway's Game of Life."""
 
-    ###################################
-    ##### Default param generator #####
-    ###################################
+    ############################################
+    ##### Default param generator and init #####
+    ############################################
     dims = 2
     shape = tuple(3 for _ in range(dims))
     space = np.ones(shape=shape)
@@ -224,6 +224,6 @@ class LifeND():
                     return results
                 i += 1
             except KeyboardInterrupt:
-                print(f'Terminated on generation {i}')
+                print(f'Terminated on generation {i}.')
                 break
 

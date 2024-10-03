@@ -201,12 +201,18 @@ class LifeND():
             self.hist.append(self.space)
         return False, (self.space, None)
     
-    def stable_search(self, t):
-        """Takes multiple steps."""
+    def stable_search(self, t_max):
+        """Takes multiple steps to search for still lifes and oscillators."""
         # Iterate over number of timesteps.
-        for _ in range(t):
-            found, results = self.step()
-            # Return the oscillator or still life if found.
-            if found:
-                return results
+        i = 0
+        while i < t_max:
+            try:
+                found, results = self.step()
+                # Return the oscillator or still life if found.
+                if found:
+                    return results
+                i += 1
+            except KeyboardInterrupt:
+                print(f'Terminated on generation {i}')
+                break
 

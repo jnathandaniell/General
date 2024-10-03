@@ -1,7 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Multi-dimensional Conway's Game of Life."""
+"""Multi-dimensional Conway's Game of Life.
+
+As Fred would have me call it, Jimmy's nD Game of Life.
+Treats the number of neighbors as a step function to make generalized rules.
+Current focus is to search for still lifes and oscillators in any number of
+dimensions.
+Leverages element-wise operations due to difficulty with vectorized
+indexing.
+Currently need to develop the index list, difficulties expanding to nD."""
 
 
 from math import pow
@@ -96,7 +104,7 @@ class LifeND():
     ##### Rule implementation #####
     ###############################
     def make_rules(self) -> None:
-        """Makes the ruleset for the game."""
+        """Makes the ruleset for the game, treating neighbors as step func."""
         # Calculate the proportionality rules for Conway's Game of Life.
         neighbors_l = 1/4
         neighbors_h = 3/8

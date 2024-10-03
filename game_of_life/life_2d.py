@@ -17,24 +17,16 @@ class LifeSpace():
 
     def __init__(self, *,
                  space=space,
-                 vectorized=False,
                  wrap=False,
                  track=False):
         self.space = space
         self.dims = np.shape(self.space)
         self.wrap = wrap
-        self.vectorized = vectorized
         self.track = track
         # Make an index space.
         self.ind_list = [(i, j)
                          for i in range(self.dims[0])
                          for j in range(self.dims[1])]
-        ind_space = [[(i, j)
-                      for i in range(self.dims[0])]
-                      for j in range(self.dims[1])]
-        self.ind_space = np.array(ind_space, dtype="f,f")
-        # Make a vectorized get_next_cell() function.
-        self.vec_get_next_cell = np.vectorize(self.get_next_cell)
         self.hist = [self.space]
 
     def check_valid_index(self, index):
@@ -110,20 +102,10 @@ class LifeSpace():
     def get_next_space(self):
         """Gets the space for the next step on the board."""
         # Perform the operation based on indices.
-        if not self.vectorized:
-            new_space = np.empty(shape=self.dims)
-            for index in self.ind_list:
-                new_space[index] = self.get_next_cell(index)
-        # Perform the operation vector-wise (NOT WORKING!).
-        else:
-            new_space = self.vec_get_next_cell(self.ind_space)
+        new_space = np.empty(shape=self.dims)
+        for index in self.ind_list:
+            new_space[index] = self.get_next_cell(index)
         return new_space
-    
-    def check_stable(self, new_space):
-        """Checks if the board is stable."""
-        if new_space == self.space:
-            return True
-        return False
 
     def step(self):
         """Takes a step in the game."""
